@@ -8,6 +8,8 @@ services:
     volumes:
         - ./sftpdata:/home/foo/upload
         - ./sftpconfig/users.conf:/etc/sftp/users.conf
+        - .hostkeys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+        - .hostkeys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key 
     ports:
         - "2222:22"
     command: foo:pass:1001
