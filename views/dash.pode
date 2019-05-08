@@ -4,16 +4,31 @@
         
     </head>
     <body>
-        My container name :$(cat /etc/hostname)
+    
+    <img src="startdash.jpg" height="150" width="150" />
+   <p>
+        <h1>Start:Dash!!</h1>
         <br>
-        Current SFTP Users:
+        Container name :$(cat /etc/hostname)
+        <br>
+        <h2>Current SFTP Users:</h2>
         <ul>
         $( $sftpUsers = get-content "/usr/src/app/sftpconfig/users.conf"
             foreach ($i in $sftpUsers)
         {
-            "<li>value: $i</li>";
+            $userName = $i.split(':')[0]
+            $userID = $i.split(':')[2]
+            "<li>User: $userName - ID: $userID 
+                - Last Login: </li>";
         })
         </ul>
+        <br>
+        <h2>Storage used per user:</h2>
+        <br>
+        <h2>Event Logs:</h2>
+        <br>
+        <h2>Connected Users:</h2>
+<p>        
 
     </body>
 </html>
