@@ -4,17 +4,15 @@ services:
   sftp:
     networks:
       sftp-net:
-    image: atmoz/sftp
+    build: ./atmoz-sftp/.
     volumes:
-        - ./sftpdata:/home/foo/upload
-        - ./sftpconfig/users.conf:/etc/sftp/users.conf
-        - .hostkeys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
-        - .hostkeys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key 
+        - ./sftpconfig/sftp:/etc/sftp
+        - ./hostkeys/ssh_host_ed25519_key:/tmp/ssh_host_ed25519_key
+        - ./hostkeys/ssh_host_rsa_key:/tmp/ssh_host_rsa_key 
+        - ./run-from-compose.sh:/run-from-compose.sh
     ports:
         - "2222:22"
-    command: foo:pass:1001
-    volumes:
-     - ./sftpdata:/home
+    command: sh /run-from-compose.sh 
   sftp_portal:
     networks:
       sftp-net:
@@ -22,7 +20,7 @@ services:
           - start-dash
     build: .
     volumes:
-        - ./sftpconfig:/usr/src/app/sftpconfig
+        - ./sftpconfig/sftp:/usr/src/app/sftpconfig
     ports:
       - "8085:8085"
     container_name: sftp-start-dash
