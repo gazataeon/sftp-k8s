@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>START:DASH!!</title>
+        
+    </head>
+    <body>
+        My container name :$(cat /etc/hostname)
+        <br>
+        Current SFTP Users:
+        <ul>
+        $( $sftpUsers = get-content "/etc/sftp/users.conf"
+            foreach ($i in $sftpUsers)
+        {
+            "<li>value: $i</li>";
+        })
+        </ul>
+
+    </body>
+</html>
