@@ -6,7 +6,8 @@ services:
       sftp-net:
     image: atmoz/sftp
     volumes:
-        - /host/upload:/home/foo/upload
+        - ./sftpdata:/home/foo/upload
+        - ./sftpconfig/users.conf:/etc/sftp/users.conf
     ports:
         - "2222:22"
     command: foo:pass:1001
@@ -18,6 +19,8 @@ services:
         aliases:
           - start-dash
     build: .
+    volumes:
+        - ./sftpconfig:/usr/src/app/sftpconfig
     ports:
       - "8085:8085"
     container_name: sftp-start-dash
